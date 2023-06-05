@@ -1,0 +1,19 @@
+# After creating this image, run it with:
+#    docker run -p 25:25 <imagename>
+FROM ubuntu:18.04
+RUN apt update
+RUN apt install -y build-essential git automake bison \
+    libasr-dev libssl-dev libevent-dev libtool zlib1g-dev bison
+RUN rm -rf /var/lib/apt/lists/* && apt clean
+RUN git clone git://github.com/OpenSMTPD/OpenSMTPD.git opensmtpd && \
+    cd opensmtpd && git checkout 6.6.0p1 && \
+	./bootstrap && ./configure && make install && \
+	cd .. && rm -rf opensmtpd
+RUN mkdir /etc/mail && echo "admin: root" > /etc/mail/aliases
+RUN mkdir /var/empty && adduser _smtpd --system --force-badname --home /var/empty \
+    --no-create-home --shell /bin/false
+RUN adduser _smtpq --system --force-badname --no-create-home --shell /bin/false 
+RUN addgroup _smtpq --force-badname
+COPY smtpd.conf /usr/local/etc/smtpd.conf
+EXPOSE 25 587
+ENTRYPOINT ["/usr/local/sbin/smtpd", "-d"]

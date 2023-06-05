@@ -1,0 +1,4 @@
+.. Custom docutils roles and config
+
+.. role:: strike
+

@@ -1,0 +1,135 @@
+.. Copyright 2022 National Technology & Engineering Solutions of Sandia, LLC
+   (NTESS).  Under the terms of Contract DE-NA0003525 with NTESS, the U.S.
+   Government retains certain rights in this software.
+   
+   Redistribution and use in source and binary/rendered forms, with or without
+   modification, are permitted provided that the following conditions are met:
+   
+    1. Redistributions of source code must retain the above copyright notice,
+       this list of conditions and the following disclaimer.
+    2. Redistributions in binary/rendered form must reproduce the above copyright
+       notice, this list of conditions and the following disclaimer in the
+       documentation and/or other materials provided with the distribution.
+    3. Neither the name of the copyright holder nor the names of its contributors
+       may be used to endorse or promote products derived from this software
+       without specific prior written permission.
+   
+   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+   ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+   WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+   DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+   FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+   DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+   SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+   CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+.. _ImageMagik_PSD:
+
+ImageMagik PSD Parsing
+======================
+
+.. .. external
+
+.. note::
+
+ PSD is an Adobe Photoshop image format.
+
+.. code-block:: c
+   :linenos:
+
+   ssize_t ReadBlob(Image *image,const size_t length,void *data);
+
+   static MagickBooleanType ReadPSDChannelZip(Image *image,const size_t channels,
+      const ssize_t type,const PSDCompressionType compression,
+      const size_t compact_size,ExceptionInfo *exception)
+   {
+       ...
+       compact_pixels=(unsigned char *) AcquireQuantumMemory(compact_size,
+         sizeof(*compact_pixels));
+       ...
+       ResetMagickMemory(&stream,0,sizeof(stream));
+       stream.data_type=Z_BINARY;
+       (void) ReadBlob(image,compact_size,compact_pixels);
+
+       stream.next_in=(Bytef *)compact_pixels;
+       stream.avail_in=(uInt) compact_size;
+       stream.next_out=(Bytef *)pixels;
+       stream.avail_out=(uInt) count;
+
+       if (inflateInit(&stream) == Z_OK)
+         {
+           int
+             ret;
+
+           while (stream.avail_out > 0)
+           {
+             ret=inflate(&stream,Z_SYNC_FLUSH);
+             if ((ret != Z_OK) && (ret != Z_STREAM_END))
+               {
+       ...
+
+**Context**
+
+``image`` is an attacker controlled PSD file that is compressed
+
+**Solution**
+
+.. container:: toggle
+
+ .. container:: toggle-header
+
+    Show/Hide
+
+ .. container:: toggle-body
+
+    .. code-block:: c
+       :linenos:
+       :emphasize-lines: 1,8,13
+
+       ssize_t ReadBlob(Image *image,const size_t length,void *data);
+
+       static MagickBooleanType ReadPSDChannelZip(Image *image,const size_t channels,
+          const ssize_t type,const PSDCompressionType compression,
+          const size_t compact_size,ExceptionInfo *exception)
+       {
+           ...
+           compact_pixels=(unsigned char *) AcquireQuantumMemory(compact_size,
+             sizeof(*compact_pixels));
+           ...
+           ResetMagickMemory(&stream,0,sizeof(stream));
+           stream.data_type=Z_BINARY;
+           (void) ReadBlob(image,compact_size,compact_pixels);
+
+           stream.next_in=(Bytef *)compact_pixels;
+           stream.avail_in=(uInt) compact_size;
+           stream.next_out=(Bytef *)pixels;
+           stream.avail_out=(uInt) count;
+
+           if (inflateInit(&stream) == Z_OK)
+             {
+               int
+                 ret;
+
+               while (stream.avail_out > 0)
+               {
+                 ret=inflate(&stream,Z_SYNC_FLUSH);
+                 if ((ret != Z_OK) && (ret != Z_STREAM_END))
+                   {
+           ...
+
+    The biggest hint is given in line one, the forward declaration of the
+    ``ReadBlob`` prototype.  That function returns an ``ssize_t`` to indicate
+    success and how many bytes were read into the blob.
+
+    The return value is not checked and the remainder of the decompression
+    continues leaving the remainder of the ``compact_pixels`` buffer uninitialized.
+    With some proper massaging, this can lead to uninitialized data being interpreted
+    as compressed data and returned.
+
+    `Original article with more details
+    <https://scarybeastsecurity.blogspot.com/2017/05/0day-proving-boxcom-fixed-aslr-via.html>`_
+    [`cached version <../../../ref/ImageMagick_PSD_uninitialized_scarybeasts.html>`_]
+
+

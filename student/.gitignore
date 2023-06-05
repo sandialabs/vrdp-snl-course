@@ -1,0 +1,9 @@
+_build
+*.bak
+modules
+_static
+Intro.rst
+Modules.rst
+Reading.rst
+Videos.rst
+StudentFAQ.rst

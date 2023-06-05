@@ -1,0 +1,78 @@
+.code .hll { background-color: #222222 }
+.code  { background: #000000; color: #cccccc }
+.code .c { color: #e05555} /* Comment */
+.code .err { color: #cccccc; border: 1px solid #FF0000 } /* Error */
+.code .esc { color: #cccccc } /* Escape */
+.code .g { color: #cccccc } /* Generic */
+.code .k { color: #cdcd00 } /* Keyword */
+.code .l { color: #cccccc } /* Literal */
+.code .n { color: #cccccc } /* Name */
+.code .o { color: #3399cc } /* Operator */
+.code .x { color: #cccccc } /* Other */
+.code .p { color: #cccccc } /* Punctuation */
+.code .ch { color: #e05555 } /* Comment.Hashbang */
+.code .cm { color: #e05555 } /* Comment.Multiline */
+.code .cp { color: #e05555 } /* Comment.Preproc */
+.code .cpf { color: #e05555 } /* Comment.PreprocFile */
+.code .c1 { color: #e05555} /* Comment.Single */
+.code .cs { color: #cd0000; font-weight: bold } /* Comment.Special */
+.code .gd { color: #cd0000 } /* Generic.Deleted */
+.code .ge { color: #cccccc; font-style: italic } /* Generic.Emph */
+.code .gr { color: #FF0000 } /* Generic.Error */
+.code .gh { color: #e05555; font-weight: bold } /* Generic.Heading */
+.code .gi { color: #00cd00 } /* Generic.Inserted */
+.code .go { color: #888888 } /* Generic.Output */
+.code .gp { color: #e05555; font-weight: bold } /* Generic.Prompt */
+.code .gs { color: #cccccc; font-weight: bold } /* Generic.Strong */
+.code .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.code .gt { color: #0044DD } /* Generic.Traceback */
+.code .kc { color: #cdcd00 } /* Keyword.Constant */
+.code .kd { color: #00cd00 } /* Keyword.Declaration */
+.code .kn { color: #cd00cd } /* Keyword.Namespace */
+.code .kp { color: #cdcd00 } /* Keyword.Pseudo */
+.code .kr { color: #cdcd00 } /* Keyword.Reserved */
+.code .kt { color: #00cd00 } /* Keyword.Type */
+.code .ld { color: #cccccc } /* Literal.Date */
+.code .m { color: #cd00cd } /* Literal.Number */
+.code .s { color: #cd0000 } /* Literal.String */
+.code .na { color: #cccccc } /* Name.Attribute */
+.code .nb { color: #cd00cd } /* Name.Builtin */
+.code .nc { color: #00cdcd } /* Name.Class */
+.code .no { color: #cccccc } /* Name.Constant */
+.code .nd { color: #cccccc } /* Name.Decorator */
+.code .ni { color: #cccccc } /* Name.Entity */
+.code .ne { color: #666699; font-weight: bold } /* Name.Exception */
+.code .nf { color: #cccccc } /* Name.Function */
+.code .nl { color: #cccccc } /* Name.Label */
+.code .nn { color: #cccccc } /* Name.Namespace */
+.code .nx { color: #cccccc } /* Name.Other */
+.code .py { color: #cccccc } /* Name.Property */
+.code .nt { color: #cccccc } /* Name.Tag */
+.code .nv { color: #00cdcd } /* Name.Variable */
+.code .ow { color: #cdcd00 } /* Operator.Word */
+.code .w { color: #cccccc } /* Text.Whitespace */
+.code .mb { color: #cd00cd } /* Literal.Number.Bin */
+.code .mf { color: #cd00cd } /* Literal.Number.Float */
+.code .mh { color: #cd00cd } /* Literal.Number.Hex */
+.code .mi { color: #cd00cd } /* Literal.Number.Integer */
+.code .mo { color: #cd00cd } /* Literal.Number.Oct */
+.code .sa { color: #cd0000 } /* Literal.String.Affix */
+.code .sb { color: #cd0000 } /* Literal.String.Backtick */
+.code .sc { color: #cd0000 } /* Literal.String.Char */
+.code .dl { color: #cd0000 } /* Literal.String.Delimiter */
+.code .sd { color: #cd0000 } /* Literal.String.Doc */
+.code .s2 { color: #cd0000 } /* Literal.String.Double */
+.code .se { color: #cd0000 } /* Literal.String.Escape */
+.code .sh { color: #cd0000 } /* Literal.String.Heredoc */
+.code .si { color: #cd0000 } /* Literal.String.Interpol */
+.code .sx { color: #cd0000 } /* Literal.String.Other */
+.code .sr { color: #cd0000 } /* Literal.String.Regex */
+.code .s1 { color: #cd0000 } /* Literal.String.Single */
+.code .ss { color: #cd0000 } /* Literal.String.Symbol */
+.code .bp { color: #cd00cd } /* Name.Builtin.Pseudo */
+.code .fm { color: #cccccc } /* Name.Function.Magic */
+.code .vc { color: #00cdcd } /* Name.Variable.Class */
+.code .vg { color: #00cdcd } /* Name.Variable.Global */
+.code .vi { color: #00cdcd } /* Name.Variable.Instance */
+.code .vm { color: #00cdcd } /* Name.Variable.Magic */
+.code .il { color: #cd00cd } /* Literal.Number.Integer.Long */

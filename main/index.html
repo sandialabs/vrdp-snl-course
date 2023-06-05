@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<!--
+   Copyright 2022 National Technology & Engineering Solutions of Sandia, LLC
+   (NTESS).  Under the terms of Contract DE-NA0003525 with NTESS, the U.S.
+   Government retains certain rights in this software.
+   
+   Redistribution and use in source and binary/rendered forms, with or without
+   modification, are permitted provided that the following conditions are met:
+   
+    1. Redistributions of source code must retain the above copyright notice,
+       this list of conditions and the following disclaimer.
+    2. Redistributions in binary/rendered form must reproduce the above copyright
+       notice, this list of conditions and the following disclaimer in the
+       documentation and/or other materials provided with the distribution.
+    3. Neither the name of the copyright holder nor the names of its contributors
+       may be used to endorse or promote products derived from this software
+       without specific prior written permission.
+   
+   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+   ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+   WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+   DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+   FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+   DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+   SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+   CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>VRDP Course Guide Portal</title>
+  <script type="text/javascript" src="_static/jquery.js"></script>
+  <link rel="stylesheet" href="_static/style.css" type="text/css" />
+
+  <script type="text/javascript">
+function urlExists(url, callback){
+  $.ajax({
+    type: 'HEAD',
+    url: url,
+    success: function(){
+      callback();
+    },
+    error: function(xhr, textstat, error) {
+      // This is what is returned when viewing as a file
+      if(xhr.status == 0){
+        callback();
+      }
+    }
+  });
+};
+function checkPortalLink(portal){
+  var url = portal+"/index.html"
+  urlExists(url,
+    function(){
+      $("."+portal).removeClass("portal-disabled");
+      $("."+portal).addClass("portal-enabled");
+      $("."+portal).addClass(portal+"-enabled");
+      $("."+portal+" p.caveat").text("");
+      $("."+portal).parent().attr("href", url);
+    }
+  );
+}
+
+window.onload = function() {
+    checkPortalLink("instructor");
+    checkPortalLink("student");
+    checkPortalLink("slides");
+}
+  </script>
+</head>
+
+<body>
+
+  <div class="sidebar">
+    <img src="_static/SNL_Logo.png" class="logo" alt="Logo"/>
+  </div>
+   
+  <div id="main">
+    <h1> Vulnerability Research Development Program </h1>
+    <h3> Course Guides Portal </h3>
+    <div style="margin: auto; width: 50%;">
+      <a href="javascript:">
+        <div class="portal instructor portal-disabled">
+          <h2>Instructor Guide</h2>
+          <p class="caveat">(guide source not found)</p>
+        </div>
+      </a>
+      <br>
+      <a href="javascript:">
+        <div class="portal student portal-disabled">
+          <h2>Student Guide</h2>
+          <p class="caveat">(guide source not found)</p>
+        </div>
+      </a>
+      <br>
+      <a href="javascript:">
+      <div class="portal slides portal-disabled">
+        <h2>Class Slides</h2>
+        <p class="caveat">(slide source not found)</p>
+      </div>
+      </a>
+    </div>
+    <footer>
+      <hr/>
+      <p> &copy; Copyright 2019, 2021, Sandia National Laboratories </p>
+    </footer>
+  </div>
+
+</body>
+</html>

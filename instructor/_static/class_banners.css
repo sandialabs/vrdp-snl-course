@@ -1,0 +1,33 @@
+/* Styles associated with class_banners.js to enable classification headers. */
+
+.class-banner {
+    width: 100%;
+    position: fixed;
+    background: #093;
+    color: white;
+    z-index: 300;
+    text-align: center;
+}
+
+.class-banner-top {
+    top: 0;
+}
+
+.class-banner-bottom {
+    bottom: 0;
+}
+
+.wy-nav-side {
+    top: 1em;
+    bottom: 1em;
+
+}
+.wy-nav-content {
+    margin-top: 1em;
+    margin-bottom: 1em;
+
+}
+
+.wy-side-scroll {
+    margin-bottom: 1em;
+}

@@ -1,0 +1,95 @@
+.. Copyright 2022 National Technology & Engineering Solutions of Sandia, LLC
+   (NTESS).  Under the terms of Contract DE-NA0003525 with NTESS, the U.S.
+   Government retains certain rights in this software.
+   
+   Redistribution and use in source and binary/rendered forms, with or without
+   modification, are permitted provided that the following conditions are met:
+   
+    1. Redistributions of source code must retain the above copyright notice,
+       this list of conditions and the following disclaimer.
+    2. Redistributions in binary/rendered form must reproduce the above copyright
+       notice, this list of conditions and the following disclaimer in the
+       documentation and/or other materials provided with the distribution.
+    3. Neither the name of the copyright holder nor the names of its contributors
+       may be used to endorse or promote products derived from this software
+       without specific prior written permission.
+   
+   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+   ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+   WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+   DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+   FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+   DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+   SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+   CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+Exim VR
+++++++++++++
+
+Exim is an open source mail server that has had some difficulty
+in the past with writing secure code. In one notable disclosure, the
+Qualys team found 21 vulnerabilities in one batch.  The two links
+below have the summary and details of this disclosure.
+
+* `21Nails: Multiple Critical Vulnerabilities in Exim Mail Server
+  <https://blog.qualys.com/vulnerabilities-threat-research/2021/05/04/21nails-multiple-vulnerabilities-in-exim-mail-server>`_
+  [`cached version <../../../ref/21nails_summary.html>`__]
+
+  * (*The official link has a video demonstration*)
+
+* `Detailed Advisory
+  <https://www.qualys.com/2021/05/04/21nails/21nails.txt>`_
+  [`cached version <../../../ref/21nails.txt>`__]
+
+Do you think they found everything?
+
+.. only:: instructor
+
+ .. admonition:: **Instructor Note**
+
+  It is going to help a lot if you can spend some time auditing the
+  source yourself beforehand, at least to the point that you have some
+  choice spots to perform a bottom up analysis yourself.  Some recommended
+  places from this author are:
+
+  * store.c/h - Memory management code
+  * string.c - Common string functions
+  * tree.c - A small tree data structure
+  * parse.c - Lots of parsing functions
+
+  The only thing you really need to do is discourage students who
+  want to jump into a top-down analysis.  It is doubtful that they have
+  mastered bottom-up at this point.
+
+Getting the code
+_____________________
+
+The git repo for exim is here:
+
+`<https://github.com/Exim/exim>`_
+
+
+Ask your instructor which tag or commit to start auditing at so that
+everyone is on the same code.
+
+.. code::
+
+ git clone https://github.com/Exim/exim
+ cd exim 
+ git checkout <tag_from_instructor>
+
+Before you start auditing
+______________________________
+
+When you are prepared to support your decision on where to start, have a
+session with your instructor to go over your evidence and why you choose the
+place you did.
+
+Let the hunt begin!
+________________________
+
+You have a lot more potential code to look at now.  Check in with your
+instructor with any findings, problems, or just because you want feedback on
+how you are doing.  That is why we are here.

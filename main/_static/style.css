@@ -1,0 +1,80 @@
+.sidebar {
+	height: 100%;
+	position: fixed;
+	padding: 10px;
+	width: 250px;
+	top: 0;
+	left: 0;
+	background: #2980B9; /* RTD blue */
+	overflow-x: hidden;
+	padding-top: 60px;
+}
+
+.sidebar img {
+	max-width: 100%;
+	height: auto;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#main {
+	margin-left: 270px;
+}
+
+#main h1, h3 {
+	text-align: center;
+}
+
+h1, h2, h3 {
+    font-family: "Roboto Slab","ff-tisa-web-pro","Georgia",Arial,sans-serif; /* Mimic RTD */
+}
+
+a {
+  text-decoration: none;
+}
+
+.portal {
+  display: inline-block;
+	border: 3px ridge black;
+	border-radius: 25px;
+	width: 50%;
+	text-align: center;
+	padding: 2em;
+	margin-top: 2em;
+	margin-bottom: 2em;
+	margin-left: auto;
+	margin-right: auto;
+	color: #404040;
+}
+
+.portal-disabled {
+    opacity: 0.75;
+    border: dashed;
+}
+
+.caveat {
+    font-style: italic;
+}
+
+.portal-enabled {
+    box-shadow: 3px 3px;
+    opacity: 0.9;
+}
+
+.portal-enabled:hover {
+    border: 3px solid black; 
+    opacity: 1;
+}
+
+.instructor {
+	background: #ff6666;
+}
+
+.student {
+    background: #2eb82e;
+}
+
+.slides {
+    background: #0066ff;
+}
